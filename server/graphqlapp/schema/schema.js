@@ -1,7 +1,7 @@
 const graphql = require('graphql');
-const Team = require('../models/team');
-const User = require('../models/user');
-const Activity = require('../models/activity');
+const Team = require('../../models/team');
+const User = require('../../models/user');
+const Activity = require('../../models/activity');
 const _ = require('lodash');
 
 const {

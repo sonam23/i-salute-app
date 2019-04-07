@@ -6,7 +6,8 @@ const userSchema = new Schema({
     email: String,
     corpId: String,
     role: Number,
-    teamId: String
+    teamId: String,
+    score: Number
 }, {timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);
