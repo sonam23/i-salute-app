@@ -25,7 +25,7 @@ const UserType = new GraphQLObjectType({
         team: {
             type: TeamType,
             resolve(parent, args){
-                return Team.findOne({nameId: parent.teamId});
+                return Team.findOne({teamId: parent.teamId});
             }
         }
     })
@@ -35,13 +35,13 @@ const TeamType = new GraphQLObjectType({
     name: 'Team',
     fields: ( ) => ({
         id: { type: GraphQLID },
-        nameId: { type: GraphQLString },
+        teamId: { type: GraphQLString },
         email: { type: GraphQLString },
         description: { type: GraphQLString },
         users: {
             type: new GraphQLList(UserType),
             resolve(parent, args){
-              return User.find({ teamId: parent.nameId });
+              return User.find({ teamId: parent.teamId });
             }
         }
     })
@@ -83,8 +83,8 @@ const RootQuery = new GraphQLObjectType({
             type: TeamType,
             args: { nameId: { type: GraphQLString } },
             resolve(parent, args){
-              console.log("NAME_ID ->> ", args.nameId);
-              return Team.findOne({nameId: args.nameId});
+              console.log("NAME_ID ->> ", args.teamId);
+              return Team.findOne({teamId: args.teamId});
             }
         },
         users: {
@@ -140,7 +140,7 @@ const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args){
                 let team = new Team({
-                    nameId: args.nameId,
+                    teamId: args.teamId,
                     email: args.email,
                     description: args.description
                 });

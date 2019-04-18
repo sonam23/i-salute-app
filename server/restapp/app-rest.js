@@ -10,8 +10,8 @@ const app = express();
 
 // allow cross-origin requests
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 require('./routes/isalute.routes.js')(app);
 

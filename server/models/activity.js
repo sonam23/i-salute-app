@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const activitySchema = new Schema({
     user1: String,
     user2: String,
-    action: String,
     message: String
 }, {timestamps: true});
 

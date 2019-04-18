@@ -1,17 +1,19 @@
 module.exports = (app) => {
-    const team = require('../controllers/team.controller.js');
-    const activity = require('../controllers/activity.controller.js');
+    const team = require('../controllers/team.controller');
+    const activity = require('../controllers/activity.controller');
+    const user = require('../controllers/user.controller');
 
-    //TODO Create a new Team
-    app.post('/teams', team.create);
-
-    //Retrieve all teams :
+    // Team endpoints
     app.get('/teams', team.findAll);
-
-    //TODO Retrieve a single Team with TeamId
     app.get('/teams/:teamId', team.findOne);
 
-    app.post('/activity', activity.create);
+    // User endpoints
+    app.get('/users', user.findAll);
+    app.get('/users/:userId', user.findOne);
+    app.post('/user', user.create);
+    app.post('/user/delete', user.deleteOne);
 
+    // Activity endpoints
     app.get('/activity', activity.findAll);
-}
+    app.post('/activity', activity.create);
+};

@@ -22,8 +22,8 @@ var users = [
 ];
 
 var teams = [
-    { nameId: 'SBSEGBILLING', email: 'sbsegbilling@intuit.com', description: 'SBSEG Billing team in IDC',  id: '1' },
-    { nameId: 'CGDATA', email: 'cgdata@intuit.com', description: 'CG Data team',  id: '2' },
+    { teamId: 'SBSEGBILLING', email: 'sbsegbilling@intuit.com', description: 'SBSEG Billing team in IDC',  id: '1' },
+    { teamId: 'CGDATA', email: 'cgdata@intuit.com', description: 'CG Data team',  id: '2' },
 ];
 
 const UserType = new GraphQLObjectType({
@@ -37,8 +37,8 @@ const UserType = new GraphQLObjectType({
         team: {
             type: TeamType,
             resolve(parent, args){
-              return _.find(teams, { nameId: parent.teamId });
-                //return Team.findById(team.nameId);
+              return _.find(teams, { teamId: parent.teamId });
+                //return Team.findById(team.teamId);
             }
         }
     })
@@ -48,14 +48,14 @@ const TeamType = new GraphQLObjectType({
     name: 'Team',
     fields: ( ) => ({
         id: { type: GraphQLID },
-        nameId: { type: GraphQLString },
+        teamId: { type: GraphQLString },
         email: { type: GraphQLString },
         description: { type: GraphQLString },
         users: {
             type: new GraphQLList(UserType),
             resolve(parent, args){
-              return _.filter(users, { teamId: parent.nameId});
-                //return Team.findById(team.nameId);
+              return _.filter(users, { teamId: parent.teamId});
+                //return Team.findById(team.teamId);
             }
         }
     })
@@ -76,8 +76,8 @@ const RootQuery = new GraphQLObjectType({
             type: TeamType,
             args: { nameId: { type: GraphQLString } },
             resolve(parent, args){
-               return _.find(teams, { nameId: args.nameId });
-              //  return Team.findById(args.nameId);
+               return _.find(teams, { teamId: args.teamId });
+              //  return Team.findById(args.teamId);
             }
         },
         users: {
