@@ -5,7 +5,7 @@ const userSchema = new Schema({
     name: String,
     email: String,
     corpId: String,
-    role: Number,
+    role: String,
     teamId: String,
     score: Number
 }, {timestamps: true});

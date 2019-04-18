@@ -1,41 +1,37 @@
-const Activity = require('../../models/activity');
+const ActivityService = require('../services/activity.service');
 
-// Create and Save a new Activity
+// Create and Save a new activity
 exports.create = (req, res) => {
-    // Validate request
-    if (!req.body.user1 && !req.body.user2) {
-        return res.status(400).send({
-            message: "User1 cannot be empty"
+    try {
+        const activity = ActivityService.create(req.body);
+        res.send(activity);
+    } catch (e) {
+        return res.status(500).send({
+            message: e.message
         });
     }
-
-    // Create a Activity
-    const activity = new Activity({
-      user1: req.body.user1,
-      user2: req.body.user2,
-      action: req.body.action,
-      message: req.body.message,
-    });
-
-    // Save Activity in the database
-    activity.save()
-        .then(data => {
-            res.send(data);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Note."
-            });
-        });
 };
 
-// Retrieve and return all Activity from the database.
+// Retrieve and return all activities from the database.
 exports.findAll = (req, res) => {
-    Activity.find()
-        .then(activity => {
-            res.send(activity);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving Activity."
-            });
+    try {
+        const activity = ActivityService.findAll();
+        res.send(activity);
+    } catch (e) {
+        return res.status(500).send({
+            message: e.message
         });
+    }
+};
+
+// Find a single Activity with a activityId
+exports.findOne = (req, res) => {
+    try {
+        const activity = ActivityService.findOne(req.param);
+        res.send(activity);
+    } catch (e) {
+        return res.status(500).send({
+            message: e.message
+        });
+    }
 };
